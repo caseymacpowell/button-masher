@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script 
+		src="https://code.jquery.com/jquery-3.2.1.js"
+		integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+		crossorigin="anonymous">
+	</script>
+</head>
+<body>
+
+	<button id="clickme">Click Me</button>
+	<div id="points"></div>
+	<button id="buy_masher">Buy Masher</button>
+	<div id="mashers"></div>
+<script>
+	var points=0;
+	var masher =0;
+	// colorSize function changes font size and color as points increase or decrease
+	function colorSize(points){ 
+		if(points < 0){
+			$('#points').css({
+					"color": "red",
+					"font-size": "100px",
+					"font-weight": "bold",
+					"text-shadow": "none"
+				});
+		} else if(points >= 0 && points < 10){
+			$('#points').css({
+					"color": "blue",
+					"font-size": "20px",
+					"font-weight": "none",
+					"text-shadow": "none"
+				});
+		} else if(points >= 10 && points < 20){
+			$('#points').css({
+					"color": "#00cc00",
+					"font-size": "30px",
+					"font-weight": "bold",
+					"text-shadow": "none"
+				});
+		} else if (points >= 20 && points < 30){
+			$('#points').css({
+					"color": "purple",
+					"font-size": "40px",
+					"font-weight": "bolder",
+					"text-shadow": "none"
+				});
+		} else if(points >= 30 && points < 40) {
+			$('#points').css({
+					"color": "#ff00ff",
+					"font-size": "60px",
+					"font-weight": "bolder",
+					"text-shadow": "none"
+				});
+		} else{
+			$('#points').css({
+					"color": "#ffff00",
+					"text-shadow": "5px 5px #ff00ff",
+					"font-size": "80px",
+					"font-weight": "boldest"
+				});
+		}
+	}
+
+	function showPoints(){
+		$('#points').text(points);
+		// $('#mashers').text(masher);
+		colorSize(points);
+
+	}
+	function runMasher(){
+		points+= masher;
+		showPoints();
+	}
+	$(Document).ready(function(){
+		$("#clickme").click(function () {
+		points++;
+		showPoints();
+		colorSize(points);
+		});
+		$('#buy_masher').click(function(){
+			points-= 40;
+			masher++;
+			showPoints();
+			//this adds a masher image anytime the masher button is pressed
+			$("#buy_masher").after('<img src="http://www.animatedimages.org/data/media/515/animated-hammer-image-0018.gif" border="0" alt="animated-hammer-image-0018"/>');
+			colorSize(points);
+		});
+		setInterval(runMasher, 1000);
+	});
+</script>
+</script>
+	
+</body>
+</html>
